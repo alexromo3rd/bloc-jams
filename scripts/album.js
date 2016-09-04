@@ -30,6 +30,22 @@ var albumMarconi = {
   ]
 };
 
+// Another Example Album
+var albumJabber = {
+  title: 'The Jab',
+  artist: 'Jabber McJabby',
+  label: 'Jab Records',
+  year: '2020',
+  albumArtUrl: 'assets/images/album_covers/17.png',
+  songs: [
+    { title: 'Hello, Jabber?', duration: '1.20' },
+    { title: 'Ring, jab, ring, jab!', duration: '6.00' },
+    { title: 'Fits in your jabber', duration: '3.21' },
+    { title: 'Can you jab me now jabber?', duration: '3.43' },
+    { title: 'Jab me with a jab', duration: '9.15' }
+  ]
+};
+
 var createSongRow = function(songNumber, songName, songLength) {
   var template =
       '<tr class="album-view-song-item">'
@@ -67,4 +83,19 @@ var setCurrentAlbum = function(album) {
 
 window.onload = function() {
   setCurrentAlbum(albumPicasso);
+  albumCoverSwitcher();
 };
+
+var albumCoverSwitcher = function ()  {
+  var albumCover = document.getElementsByClassName('album-cover-art')[0];
+  var albums = [albumPicasso, albumMarconi, albumJabber];
+  var index = 1;
+  albumCover.addEventListener('click', function() {
+    document.getElementsByClassName('album-view')[0].nodeValue =
+      setCurrentAlbum(albums[index]);
+      index++;
+      if (index == albums.length) {
+        index = 0;
+      }
+    })
+}

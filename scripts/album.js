@@ -28,6 +28,13 @@ var createSongRow = function(songNumber, songName, songLength) {
 		currentlyPlayingSongNumber = null;
         currentSongFromAlbum = null;
 	}
+    
+    // Currently working on the function below
+    // Try using songNumberCell method but for name ie. songNameCell
+    var updatePlayerBarSong = function() {
+      var currentlyPlayingSong = $(this).find('.song-item-title');
+      $('h2.song-name').text(currentlyPlayingSong);
+    }
     updatePlayerBarSong();
   };
   
@@ -74,12 +81,6 @@ var setCurrentAlbum = function(album) {
     $albumSongList.append($newRow);
   }
 };
-
-// Currently working on the function below
-// Try using songNumberCell method but for name ie. songNameCell
-var updatePlayerBarSong = function() {
-  $('.player-bar h2').text(this.currentSongFromAlbum);
-}
 
 // Album button templates
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';

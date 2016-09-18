@@ -22,20 +22,14 @@ var createSongRow = function(songNumber, songName, songLength) {
 		$(this).html(pauseButtonTemplate);
 		currentlyPlayingSongNumber = songNumber;
         currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+        updatePlayerBarSong();
 	} else if (currentlyPlayingSongNumber === songNumber) {
       // Switch from Pause -> Play button to pause currently playing song.
 		$(this).html(playButtonTemplate);
+        $('.main-controls .play-pause').html(playerBarPlayButton)
 		currentlyPlayingSongNumber = null;
         currentSongFromAlbum = null;
 	}
-    
-    // Currently working on the function below
-    // Try using songNumberCell method but for name ie. songNameCell
-    var updatePlayerBarSong = function() {
-      var currentlyPlayingSong = $(this).find('.song-item-title');
-      $('h2.song-name').text(currentlyPlayingSong);
-    }
-    updatePlayerBarSong();
   };
   
   var onHover = function(event) {
@@ -81,10 +75,28 @@ var setCurrentAlbum = function(album) {
     $albumSongList.append($newRow);
   }
 };
+  
+var trackIndex = function(album, song) {
+  return album.songs.indexOf(song);
+};
+
+var nextSong = function() {
+
+};
+
+var updatePlayerBarSong = function() {
+  $('.currently-playing .song-name').text(currentSongFromAlbum.title);
+  $('.currently-playing .artist-name').text(currentAlbum.artist);
+  $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
+
+  $('.main-controls .play-pause').html(playerBarPauseButton);
+};
 
 // Album button templates
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
+var playerBarPlayButton = '<span class="ion-play"></span>';
+var playerBarPauseButton = '<span class="ion-pause"></span>';
 
 var currentAlbum = null;
 // #1

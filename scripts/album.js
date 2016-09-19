@@ -114,6 +114,34 @@ var nextSong = function() {
 
 var previousSong = function() {
   
+  var getLastSongNumber = function(index) {
+    return index == (currentAlbum.songs.length - 1) ? 1 : index + 2;
+  };
+  // Use the trackIndex() helper function to get the index of the current song
+  var currentIndex = trackIndex(currentAlbum, currentSongFromAlbum);
+  // Increment the value of the index.
+  currentIndex--;
+  
+  if (currentIndex < 0) {
+    currentIndex = currentAlbum.songs.length - 1;
+  }
+  
+  // Set a new current song to currentSongFromAlbum.
+  currentlyPlayingSongNumber = currentIndex + 1;
+  currentSongFromAlbum = currentAlbum.songs[currentIndex];
+  
+  // Update the player bar to show the new song.
+  updatePlayerBarSong();
+  
+  // Update the HTML of the previous song's .song-item-number element with a number.
+  var lastSongNumber = getLastSongNumber(currentIndex);
+  var lastPlayingCell = $('.song-item-number[data-song-number="' + lastSongNumber + '"]');
+  var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
+
+  // Update the HTML of the new song's .song-item-number element with a pause button.
+  currentlyPlayingCell.html(pauseButtonTemplate);
+  lastPlayingCell.html(lastSongNumber);
+  
 };
 
 var updatePlayerBarSong = function() {
@@ -133,8 +161,8 @@ var currentAlbum = null;
 // #1
 var currentlyPlayingSongNumber = null;
 var currentSongFromAlbum = null;
-var $nextButton = $('.main-controls .next');
 var $previousButton = $('.main-controls .previous');
+var $nextButton = $('.main-controls .next');
 
 $(document).ready(function() {
   setCurrentAlbum(albumPicasso);

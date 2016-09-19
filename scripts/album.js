@@ -81,15 +81,15 @@ var trackIndex = function(album, song) {
 };
 
 var nextSong = function() {
-  
+
+  var getLastSongNumber = function(index) {
+    return index == 0 ? currentAlbum.songs.length : index;
+  };
   // Use the trackIndex() helper function to get the index of the current song
   var currentIndex = trackIndex(currentAlbum, currentSongFromAlbum);
-  
-  // Know what the previous song is. This includes the situation in which the next song is the first song, following the final song in the album (that is, it should "wrap" around).
-  var prevSongIndex = currentIndex;
-  
   // Increment the value of the index.
   currentIndex++;
+  
   if (currentIndex >= currentAlbum.songs.length) {
     currentIndex = 0;
   }
@@ -102,13 +102,17 @@ var nextSong = function() {
   updatePlayerBarSong();
   
   // Update the HTML of the previous song's .song-item-number element with a number.
-  var lastPlayingCell = $('.song-item-number[data-song-number="' + prevSongIndex + '"]');
-  console.log(lastPlayingCell);
+  var lastSongNumber = getLastSongNumber(currentIndex);
+  var lastPlayingCell = $('.song-item-number[data-song-number="' + lastSongNumber + '"]');
   var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
 
   // Update the HTML of the new song's .song-item-number element with a pause button.
-  lastPlayingCell.html(prevSongIndex);
   currentlyPlayingCell.html(pauseButtonTemplate);
+  lastPlayingCell.html(lastSongNumber);
+  
+};
+
+var previousSong = function() {
   
 };
 
@@ -130,10 +134,10 @@ var currentAlbum = null;
 var currentlyPlayingSongNumber = null;
 var currentSongFromAlbum = null;
 var $nextButton = $('.main-controls .next');
-
+var $previousButton = $('.main-controls .previous');
 
 $(document).ready(function() {
   setCurrentAlbum(albumPicasso);
   $nextButton.click(nextSong);
-
+  $previousButton.click(previousSong);
 });

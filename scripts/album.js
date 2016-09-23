@@ -10,7 +10,7 @@ var createSongRow = function(songNumber, songName, songLength) {
   var $row = $(template);
   
   var clickHandler = function() {
-	var songNumber = $(this).attr('data-song-number');
+	var songNumber = parseInt($(this).attr('data-song-number'));
 
 	if (currentlyPlayingSongNumber !== null) {
 		var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
@@ -34,7 +34,7 @@ var createSongRow = function(songNumber, songName, songLength) {
   
   var onHover = function(event) {
     var songNumberCell = $(this).find('.song-item-number');
-    var songNumber = songNumberCell.attr('data-song-number');
+    var songNumber = parseInt(songNumberCell.attr('data-song-number'));
 
     if (songNumber !== currentlyPlayingSongNumber) {
       songNumberCell.html(playButtonTemplate);
@@ -43,7 +43,7 @@ var createSongRow = function(songNumber, songName, songLength) {
   
   var offHover = function(event) {
     var songNumberCell = $(this).find('.song-item-number');
-    var songNumber = songNumberCell.attr('data-song-number');
+    var songNumber = parseInt(songNumberCell.attr('data-song-number'));
 
     if (songNumber !== currentlyPlayingSongNumber) {
         songNumberCell.html(songNumber);
@@ -83,7 +83,11 @@ var trackIndex = function(album, song) {
 var nextSong = function() {
 
   var getLastSongNumber = function(index) {
-    return index == 0 ? currentAlbum.songs.length : index;
+    if (index == 0) {
+      return currentAlbum.songs.length;
+    } else {
+      return index;
+    }
   };
   // Use the trackIndex() helper function to get the index of the current song
   var currentIndex = trackIndex(currentAlbum, currentSongFromAlbum);
@@ -115,7 +119,11 @@ var nextSong = function() {
 var previousSong = function() {
   
   var getLastSongNumber = function(index) {
-    return index == (currentAlbum.songs.length - 1) ? 1 : index + 2;
+    if (index == currentAlbum.songs.length - 1) {
+      return 1;
+    } else {
+      return index + 2;
+    }
   };
   // Use the trackIndex() helper function to get the index of the current song
   var currentIndex = trackIndex(currentAlbum, currentSongFromAlbum);

@@ -55,6 +55,11 @@ var createSongRow = function(songNumber, songName, songLength) {
   return $row;
 };
 
+var setSong = function(songNumber) {
+  currentlyPlayingSongNumber = songNumber;
+  currentSongFromAlbum = songNumber;
+};
+
 var setCurrentAlbum = function(album) {
   currentAlbum = album;
   var $albumTitle = $('.album-view-title');

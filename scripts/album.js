@@ -56,8 +56,8 @@ var createSongRow = function(songNumber, songName, songLength) {
 };
 
 var setSong = function(songNumber) {
-  currentlyPlayingSongNumber = songNumber;
-  currentSongFromAlbum = songNumber;
+  currentlyPlayingSongNumber = $(this).find('.song-item-number');
+  currentSongFromAlbum = parseInt(currentlyPlayingSongNumber.attr('data-song-number'));
 };
 
 var setCurrentAlbum = function(album) {

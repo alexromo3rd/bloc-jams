@@ -1,3 +1,13 @@
+var setSong = function(songNumber) {
+  var currentlyPlayingSongNumber = parseInt(songNumber);
+  var currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+};
+
+// Complete this function as part of checkpoint 19 assignment 
+var getSongNumberCell = function(number) {
+  
+};
+
 var createSongRow = function(songNumber, songName, songLength) {
   var template =
       '<tr class="album-view-song-item">'
@@ -20,8 +30,7 @@ var createSongRow = function(songNumber, songName, songLength) {
 	if (currentlyPlayingSongNumber !== songNumber) {
       // Switch from Play -> Pause button to indicate new song is playing.
 		$(this).html(pauseButtonTemplate);
-		currentlyPlayingSongNumber = songNumber;
-        currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+		 setSong(songNumber);
         updatePlayerBarSong();
 	} else if (currentlyPlayingSongNumber === songNumber) {
       // Switch from Pause -> Play button to pause currently playing song.
@@ -33,8 +42,7 @@ var createSongRow = function(songNumber, songName, songLength) {
   };
   
   var onHover = function(event) {
-    var songNumberCell = $(this).find('.song-item-number');
-    var songNumber = parseInt(songNumberCell.attr('data-song-number'));
+    setSong();
 
     if (songNumber !== currentlyPlayingSongNumber) {
       songNumberCell.html(playButtonTemplate);
@@ -42,8 +50,7 @@ var createSongRow = function(songNumber, songName, songLength) {
   };
   
   var offHover = function(event) {
-    var songNumberCell = $(this).find('.song-item-number');
-    var songNumber = parseInt(songNumberCell.attr('data-song-number'));
+    setSong();
 
     if (songNumber !== currentlyPlayingSongNumber) {
         songNumberCell.html(songNumber);
@@ -53,11 +60,6 @@ var createSongRow = function(songNumber, songName, songLength) {
   $row.find('.song-item-number').click(clickHandler);
   $row.hover(onHover, offHover);
   return $row;
-};
-
-var setSong = function(songNumber) {
-  currentlyPlayingSongNumber = $(this).find('.song-item-number');
-  currentSongFromAlbum = parseInt(currentlyPlayingSongNumber.attr('data-song-number'));
 };
 
 var setCurrentAlbum = function(album) {

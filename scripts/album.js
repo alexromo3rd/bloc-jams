@@ -5,7 +5,7 @@ var setSong = function(songNumber) {
 
 // Complete this function as part of checkpoint 19 assignment 
 var getSongNumberCell = function(number) {
-  
+  return $('.song-item-number[data-song-number="' + number + '"]');
 };
 
 var createSongRow = function(songNumber, songName, songLength) {
@@ -23,7 +23,7 @@ var createSongRow = function(songNumber, songName, songLength) {
 	var songNumber = parseInt($(this).attr('data-song-number'));
 
 	if (currentlyPlayingSongNumber !== null) {
-		var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
+		var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
       // Revert to song number for currently playing song because user started playing new song.
 		currentlyPlayingCell.html(currentlyPlayingSongNumber);
 	}
@@ -114,8 +114,8 @@ var nextSong = function() {
   
   // Update the HTML of the previous song's .song-item-number element with a number.
   var lastSongNumber = getLastSongNumber(currentIndex);
-  var lastPlayingCell = $('.song-item-number[data-song-number="' + lastSongNumber + '"]');
-  var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
+  var lastPlayingCell = getSongNumberCell(lastSongNumber);
+  var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
 
   // Update the HTML of the new song's .song-item-number element with a pause button.
   currentlyPlayingCell.html(pauseButtonTemplate);
@@ -150,8 +150,8 @@ var previousSong = function() {
   
   // Update the HTML of the previous song's .song-item-number element with a number.
   var lastSongNumber = getLastSongNumber(currentIndex);
-  var lastPlayingCell = $('.song-item-number[data-song-number="' + lastSongNumber + '"]');
-  var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
+  var lastPlayingCell = getSongNumberCell(lastSongNumber);
+  var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
 
   // Update the HTML of the new song's .song-item-number element with a pause button.
   currentlyPlayingCell.html(pauseButtonTemplate);

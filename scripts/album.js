@@ -1,13 +1,3 @@
-var setSong = function(songNumber) {
-  var currentlyPlayingSongNumber = parseInt(songNumber);
-  var currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
-};
-
-// Complete this function as part of checkpoint 19 assignment 
-var getSongNumberCell = function(number) {
-  return $('.song-item-number[data-song-number="' + number + '"]');
-};
-
 var createSongRow = function(songNumber, songName, songLength) {
   var template =
       '<tr class="album-view-song-item">'
@@ -30,7 +20,11 @@ var createSongRow = function(songNumber, songName, songLength) {
 	if (currentlyPlayingSongNumber !== songNumber) {
       // Switch from Play -> Pause button to indicate new song is playing.
 		$(this).html(pauseButtonTemplate);
+<<<<<<< HEAD
 		 setSong(songNumber);
+=======
+		setSong(songNumber);
+>>>>>>> assignment-19-np-buttons
         updatePlayerBarSong();
 	} else if (currentlyPlayingSongNumber === songNumber) {
       // Switch from Pause -> Play button to pause currently playing song.
@@ -106,8 +100,7 @@ var nextSong = function() {
   }
   
   // Set a new current song to currentSongFromAlbum.
-  currentlyPlayingSongNumber = currentIndex + 1;
-  currentSongFromAlbum = currentAlbum.songs[currentIndex];
+  setSong(currentIndex + 1);
   
   // Update the player bar to show the new song.
   updatePlayerBarSong();
@@ -142,8 +135,7 @@ var previousSong = function() {
   }
   
   // Set a new current song to currentSongFromAlbum.
-  currentlyPlayingSongNumber = currentIndex + 1;
-  currentSongFromAlbum = currentAlbum.songs[currentIndex];
+  setSong(currentIndex + 1);
   
   // Update the player bar to show the new song.
   updatePlayerBarSong();
